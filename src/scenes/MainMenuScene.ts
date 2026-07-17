@@ -1,4 +1,5 @@
 import { BaseScene } from './BaseScene';
+import { SceneManager } from '../managers/SceneManager';
 import { BackgroundAnimation } from '../components/BackgroundAnimation';
 import { LogoAnimation } from '../ui/LogoAnimation';
 import { GameList } from '../ui/GameList';
@@ -26,8 +27,9 @@ export class MainMenuScene extends BaseScene {
         label: 'Space Shooter',
         isActive: true,
         onClick: () => {
-          console.log('Space Shooter clicked! Ready to launch the game scene.');
-          // TODO: SceneManager.changeScene(...)
+          import('../games/spaceshooter/scenes/SpaceShooterScene').then(({ SpaceShooterScene }) => {
+            SceneManager.changeSceneWithTransition(new SpaceShooterScene());
+          });
         },
       },
       {

@@ -1,5 +1,6 @@
 import { appInstance } from './app/App';
 import { SceneManager } from './managers/SceneManager';
+import { InputManager } from './managers/InputManager';
 import { MainMenuScene } from './scenes/MainMenuScene';
 
 async function bootstrap() {
@@ -11,8 +12,9 @@ async function bootstrap() {
   // 1. Initialize PixiJS Application
   await appInstance.init(canvas);
 
-  // 2. Initialize Scene Manager
+  // 2. Initialize Managers
   SceneManager.initialize();
+  InputManager.init();
 
   // 3. Load the initial scene
   const mainMenu = new MainMenuScene();
