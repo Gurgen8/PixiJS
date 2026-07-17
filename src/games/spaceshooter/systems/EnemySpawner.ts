@@ -29,7 +29,7 @@ export class EnemySpawner {
     this.wave = waveNumber;
     // more enemies and slightly faster spawns each wave
     this.enemiesToSpawn = 5 + this.wave * 2;
-    this.spawnInterval = Math.max(20, 60 - this.wave * 5); 
+    this.spawnInterval = Math.max(20, 60 - this.wave * 5);
     this.spawnTimer = 0;
   }
 
@@ -68,18 +68,18 @@ export class EnemySpawner {
   private spawnEnemy(): void {
     const enemy = this.enemyPool.get();
     enemy.visible = true;
-    
+
     // Random X position within screen bounds
     const padding = enemy.hitWidth;
     const x = Math.random() * (GameConfig.width - padding * 2) + padding;
     const speedMultiplier = 1 + this.wave * 0.1;
-    
+
     enemy.spawn(x, -50, speedMultiplier);
     this.activeEnemies.push(enemy);
   }
 
   public clear(): void {
-    this.activeEnemies.forEach(e => {
+    this.activeEnemies.forEach((e) => {
       e.isActive = false;
       e.visible = false;
       this.enemyPool.release(e);

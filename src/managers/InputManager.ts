@@ -24,7 +24,7 @@ export class InputManager {
   private static onKeyUp(e: KeyboardEvent): void {
     this.keys[e.code] = false;
   }
-  
+
   private static onPointerDown(e: PointerEvent): void {
     if (e.button === 0) {
       this.keys['MouseLeft'] = true;

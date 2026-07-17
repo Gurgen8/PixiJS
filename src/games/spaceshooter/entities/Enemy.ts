@@ -1,25 +1,20 @@
-import { Graphics } from 'pixi.js';
+import { Sprite, Assets } from 'pixi.js';
 
-export class Enemy extends Graphics {
+export class Enemy extends Sprite {
   public speed: number = 2;
   public isActive: boolean = false;
   public scoreValue: number = 100;
-  
+
   // AABB properties
   public hitWidth: number = 40;
   public hitHeight: number = 40;
 
   constructor() {
-    super();
-    this.drawShape();
-  }
-
-  private drawShape(): void {
-    this.clear();
-    // Draw an enemy shape (diamond/square)
-    this.rect(-this.hitWidth / 2, -this.hitHeight / 2, this.hitWidth, this.hitHeight);
-    this.fill(0xff3333);
-    this.stroke({ color: 0xffaaaa, width: 2 });
+    super(Assets.get('assets/images/spaceshooter/enemy.png'));
+    this.anchor.set(0.5);
+    this.width = this.hitWidth;
+    this.height = this.hitHeight;
+    this.blendMode = 'add'; // Remove black background as temporary solution
   }
 
   public spawn(x: number, y: number, speedMultiplier: number = 1): void {

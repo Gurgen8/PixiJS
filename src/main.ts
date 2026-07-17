@@ -1,3 +1,4 @@
+import { Assets } from 'pixi.js';
 import { appInstance } from './app/App';
 import { SceneManager } from './managers/SceneManager';
 import { InputManager } from './managers/InputManager';
@@ -15,6 +16,13 @@ async function bootstrap() {
   // 2. Initialize Managers
   SceneManager.initialize();
   InputManager.init();
+
+  // 3. Preload Assets
+  await Assets.load([
+    'assets/images/spaceshooter/player.png',
+    'assets/images/spaceshooter/enemy.png',
+    'assets/images/spaceshooter/bullet.png',
+  ]);
 
   // 3. Load the initial scene
   const mainMenu = new MainMenuScene();

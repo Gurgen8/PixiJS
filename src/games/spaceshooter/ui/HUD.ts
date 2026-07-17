@@ -47,11 +47,14 @@ export class HUD extends Container {
 
   public setPaused(isPaused: boolean): void {
     if (isPaused && !this.getChildByName('pausedText')) {
-      const pausedText = new Text({ text: 'PAUSED', style: { fill: 0xffff00, fontSize: 48, fontWeight: 'bold' }});
+      const pausedText = new Text({
+        text: 'PAUSED',
+        style: { fill: 0xffff00, fontSize: 48, fontWeight: 'bold' },
+      });
       pausedText.name = 'pausedText';
       // It will just draw relative to HUD, but ideally centered.
       // GameConfig width/height is better but let's just place it statically for now
-      pausedText.position.set(400, 300); 
+      pausedText.position.set(400, 300);
       pausedText.anchor.set(0.5);
       this.addChild(pausedText);
     } else if (!isPaused) {

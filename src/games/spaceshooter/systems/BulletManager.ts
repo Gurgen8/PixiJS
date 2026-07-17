@@ -41,7 +41,7 @@ export class BulletManager {
   }
 
   public clear(): void {
-    this.activeBullets.forEach(b => {
+    this.activeBullets.forEach((b) => {
       b.isActive = false;
       b.visible = false;
       this.bulletPool.release(b);

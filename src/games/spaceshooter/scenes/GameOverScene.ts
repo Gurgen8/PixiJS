@@ -24,8 +24,8 @@ export class GameOverScene extends BaseScene {
         alpha: 0.5,
         blur: 10,
         color: 0x000000,
-        distance: 5
-      }
+        distance: 5,
+      },
     });
 
     this.titleText = new Text({ text: 'GAME OVER', style: titleStyle });
@@ -37,7 +37,10 @@ export class GameOverScene extends BaseScene {
       fontFamily: 'Arial',
     });
 
-    this.scoreText = new Text({ text: `Score: ${finalScore} | Wave: ${finalWave}`, style: scoreStyle });
+    this.scoreText = new Text({
+      text: `Score: ${finalScore} | Wave: ${finalWave}`,
+      style: scoreStyle,
+    });
     this.scoreText.anchor.set(0.5);
 
     this.restartButton = new GameButton({
@@ -49,7 +52,7 @@ export class GameOverScene extends BaseScene {
         import('./SpaceShooterScene').then(({ SpaceShooterScene }) => {
           SceneManager.changeSceneWithTransition(new SpaceShooterScene());
         });
-      }
+      },
     });
 
     this.menuButton = new GameButton({
@@ -57,7 +60,7 @@ export class GameOverScene extends BaseScene {
       isActive: true,
       onClick: () => {
         SceneManager.changeSceneWithTransition(new MainMenuScene());
-      }
+      },
     });
 
     this.addChild(this.titleText);
@@ -82,7 +85,7 @@ export class GameOverScene extends BaseScene {
   public resize(width: number, height: number): void {
     this.titleText.position.set(width / 2, height * 0.3);
     this.scoreText.position.set(width / 2, height * 0.45);
-    
+
     this.restartButton.position.set(width / 2, height * 0.6);
     this.menuButton.position.set(width / 2, height * 0.7);
   }

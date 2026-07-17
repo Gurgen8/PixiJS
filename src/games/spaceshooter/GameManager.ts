@@ -51,7 +51,7 @@ export class GameManager {
 
   public onPlayerHit(): void {
     if (this.isGameOver) return;
-    
+
     this.lives--;
     this.updateHUD();
     AudioManager.playSound('player_hit');
@@ -66,7 +66,7 @@ export class GameManager {
 
   private startNextWave(): void {
     if (this.isGameOver) return;
-    
+
     this.wave++;
     this.updateHUD();
     AudioManager.playSound('wave_complete');
@@ -76,6 +76,7 @@ export class GameManager {
   private triggerGameOver(): void {
     this.isGameOver = true;
     this.player.isActive = false;
+    this.player.explode();
     AudioManager.playSound('game_over');
     this.onGameOverCallback();
   }

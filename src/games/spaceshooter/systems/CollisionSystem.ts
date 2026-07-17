@@ -8,7 +8,7 @@ export class CollisionSystem {
     player: Player,
     bulletManager: BulletManager,
     enemySpawner: EnemySpawner,
-    gameManager: GameManager
+    gameManager: GameManager,
   ): void {
     const activeBullets = bulletManager.activeBullets;
     const activeEnemies = enemySpawner.activeEnemies;
@@ -41,7 +41,10 @@ export class CollisionSystem {
   /**
    * Simple Axis-Aligned Bounding Box collision check.
    */
-  private static checkAABB(objA: any, objB: any): boolean {
+  private static checkAABB(
+    objA: import('pixi.js').Container,
+    objB: import('pixi.js').Container,
+  ): boolean {
     const boundsA = objA.getBounds();
     const boundsB = objB.getBounds();
 

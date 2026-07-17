@@ -54,7 +54,7 @@ export class SceneManager {
     SceneManager.changeScene(newScene);
 
     // Optional: wait for assets to load if needed here
-    
+
     // Fade In
     await SceneManager.fade(1, 0, 30);
 
@@ -66,18 +66,18 @@ export class SceneManager {
     return new Promise((resolve) => {
       let currentFrame = 0;
       const step = (to - from) / frames;
-      
+
       const onTick = () => {
         currentFrame++;
         SceneManager.overlay.alpha = from + step * currentFrame;
-        
+
         if (currentFrame >= frames) {
           SceneManager.overlay.alpha = to;
           Ticker.shared.remove(onTick);
           resolve();
         }
       };
-      
+
       Ticker.shared.add(onTick);
     });
   }

@@ -1,11 +1,11 @@
-import { Graphics } from 'pixi.js';
+import { Sprite, Assets } from 'pixi.js';
 import { InputManager } from '../../../managers/InputManager';
 import { GameConfig } from '../../../config/GameConfig';
 
-export class Player extends Graphics {
+export class Player extends Sprite {
   public speed: number = 8;
   public isActive: boolean = true;
-  
+
   // AABB properties
   public hitWidth: number = 50;
   public hitHeight: number = 50;
@@ -17,25 +17,18 @@ export class Player extends Graphics {
   public onShoot?: (x: number, y: number) => void;
 
   constructor() {
-    super();
-    this.drawShape();
+    super(Assets.get('assets/images/spaceshooter/player.png'));
+    this.anchor.set(0.5);
+    this.width = this.hitWidth;
+    this.height = this.hitHeight;
+    this.blendMode = 'add'; // Remove black background as temporary solution
     this.resetPosition();
-  }
-
-  private drawShape(): void {
-    this.clear();
-    // Draw a spaceship shape (triangle)
-    this.moveTo(0, -this.hitHeight / 2);
-    this.lineTo(this.hitWidth / 2, this.hitHeight / 2);
-    this.lineTo(-this.hitWidth / 2, this.hitHeight / 2);
-    this.closePath();
-    this.fill(0x44aaff);
-    this.stroke({ color: 0xffffff, width: 2 });
   }
 
   public resetPosition(): void {
     this.position.set(GameConfig.width / 2, GameConfig.height - 100);
     this.isActive = true;
+    this.visible = true;
   }
 
   public update(delta: number): void {
@@ -69,5 +62,32 @@ export class Player extends Graphics {
   public hit(): void {
     // Player took damage
     // Note: handling lives will be in GameManager
+  }
+
+  public explode(): void {
+    this.visible = false;
+
+    // Create an explosion effect using pixi graphics
+    import('pixi.js').then(({ Graphics, Ticker }) => {
+      const explosion = new Graphics();
+      explosion.circle(0, 0, 30);
+      explosion.fill(0xff8800);
+      explosion.blendMode = 'add';
+
+      this.parent?.addChild(explosion);
+      explosion.position.copyFrom(this.position);
+
+      let scale = 1;
+      const explodeTick = (ticker: import('pixi.js').Ticker) => {
+        scale += ticker.deltaTime * 0.15;
+        explosion.scale.set(scale);
+        explosion.alpha -= ticker.deltaTime * 0.05;
+        if (explosion.alpha <= 0) {
+          explosion.destroy();
+          Ticker.shared.remove(explodeTick);
+        }
+      };
+      Ticker.shared.add(explodeTick);
+    });
   }
 }

@@ -10,6 +10,7 @@ import { GameOverScene } from './GameOverScene';
 import { GameConfig } from '../../../config/GameConfig';
 import { Container } from 'pixi.js';
 import { InputManager } from '../../../managers/InputManager';
+import { AudioManager } from '../../../managers/AudioManager';
 
 export class SpaceShooterScene extends BaseScene {
   private player: Player;
@@ -41,6 +42,7 @@ export class SpaceShooterScene extends BaseScene {
 
     this.player.onShoot = (x, y) => {
       this.bulletManager.spawnBullet(x, y, false); // Player bullet
+      AudioManager.playSound('shoot');
     };
 
     // UI
@@ -48,11 +50,8 @@ export class SpaceShooterScene extends BaseScene {
     this.uiLayer.addChild(this.hud);
 
     // Manager
-    this.gameManager = new GameManager(
-      this.enemySpawner,
-      this.hud,
-      this.player,
-      () => this.onGameOver()
+    this.gameManager = new GameManager(this.enemySpawner, this.hud, this.player, () =>
+      this.onGameOver(),
     );
 
     this.resize(GameConfig.width, GameConfig.height);
@@ -83,12 +82,7 @@ export class SpaceShooterScene extends BaseScene {
     this.bulletManager.update(delta);
     this.enemySpawner.update(delta);
 
-    CollisionSystem.update(
-      this.player,
-      this.bulletManager,
-      this.enemySpawner,
-      this.gameManager
-    );
+    CollisionSystem.update(this.player, this.bulletManager, this.enemySpawner, this.gameManager);
 
     this.hud.updateFPS();
   }
@@ -105,7 +99,9 @@ export class SpaceShooterScene extends BaseScene {
   private onGameOver(): void {
     // Wait a brief moment, then transition to GameOverScene
     setTimeout(() => {
-      SceneManager.changeSceneWithTransition(new GameOverScene(this.gameManager.score, this.gameManager.wave));
+      SceneManager.changeSceneWithTransition(
+        new GameOverScene(this.gameManager.score, this.gameManager.wave),
+      );
     }, 1000);
   }
 }
