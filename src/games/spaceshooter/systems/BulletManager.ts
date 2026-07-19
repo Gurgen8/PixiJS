@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js';
-import { Bullet } from '../entities/Bullet';
-import { ObjectPool } from '../../../utils/ObjectPool';
-import { GameConfig } from '../../../config/GameConfig';
+import { Bullet } from '@/games/spaceshooter/entities/Bullet';
+import { ObjectPool } from '@/utils/ObjectPool';
+import { GameConfig } from '@/config/GameConfig';
 
 export class BulletManager {
   private bulletPool: ObjectPool<Bullet>;

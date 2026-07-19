@@ -1,6 +1,6 @@
-import { EnemySpawner } from '@/games/spaceshooter/systems/EnemySpawner';
-import { HUD } from '@/games/spaceshooter/ui/HUD';
-import { Player } from '@/games/spaceshooter/entities/Player';
+import { ItemSpawner } from '@/games/fruitcollector/systems/ItemSpawner';
+import { HUD } from '@/games/fruitcollector/ui/HUD';
+import { Basket } from '@/games/fruitcollector/entities/Basket';
 import { AudioManager } from '@/managers/AudioManager';
 
 export class GameManager {
@@ -10,18 +10,18 @@ export class GameManager {
   public isGameOver: boolean = false;
   public isPaused: boolean = false;
 
-  private enemySpawner: EnemySpawner;
+  private itemSpawner: ItemSpawner;
   private hud: HUD;
-  private player: Player;
+  private basket: Basket;
   private onGameOverCallback: () => void;
 
-  constructor(enemySpawner: EnemySpawner, hud: HUD, player: Player, onGameOver: () => void) {
-    this.enemySpawner = enemySpawner;
+  constructor(itemSpawner: ItemSpawner, hud: HUD, basket: Basket, onGameOver: () => void) {
+    this.itemSpawner = itemSpawner;
     this.hud = hud;
-    this.player = player;
+    this.basket = basket;
     this.onGameOverCallback = onGameOver;
 
-    this.enemySpawner.onWaveComplete = () => {
+    this.itemSpawner.onWaveComplete = () => {
       this.startNextWave();
     };
   }
@@ -32,9 +32,9 @@ export class GameManager {
     this.wave = 1;
     this.isGameOver = false;
     this.isPaused = false;
-    this.player.resetPosition();
+    this.basket.resetPosition();
     this.updateHUD();
-    this.enemySpawner.startWave(this.wave);
+    this.itemSpawner.startWave(this.wave);
   }
 
   public togglePause(): void {
@@ -46,21 +46,25 @@ export class GameManager {
     if (this.isGameOver) return;
     this.score += points;
     this.updateHUD();
-    AudioManager.playSound('explosion');
   }
 
-  public onPlayerHit(): void {
+  public onItemMissed(): void {
     if (this.isGameOver) return;
+    this.loseLife();
+  }
 
+  public onBombHit(): void {
+    if (this.isGameOver) return;
+    AudioManager.playSound('bomb');
+    this.loseLife();
+  }
+
+  private loseLife(): void {
     this.lives--;
     this.updateHUD();
-    AudioManager.playSound('player_hit');
 
     if (this.lives <= 0) {
       this.triggerGameOver();
-    } else {
-      // Temporarily give player invincibility or just reset position?
-      // For now, let's just let them continue.
     }
   }
 
@@ -69,14 +73,12 @@ export class GameManager {
 
     this.wave++;
     this.updateHUD();
-    AudioManager.playSound('wave_complete');
-    this.enemySpawner.startWave(this.wave);
+    this.itemSpawner.startWave(this.wave);
   }
 
   private triggerGameOver(): void {
     this.isGameOver = true;
-    this.player.isActive = false;
-    this.player.explode();
+    this.basket.isActive = false;
     AudioManager.playSound('game_over');
     this.onGameOverCallback();
   }

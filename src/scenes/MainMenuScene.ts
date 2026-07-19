@@ -1,9 +1,9 @@
-import { BaseScene } from './BaseScene';
-import { SceneManager } from '../managers/SceneManager';
-import { BackgroundAnimation } from '../components/BackgroundAnimation';
-import { LogoAnimation } from '../ui/LogoAnimation';
-import { GameList } from '../ui/GameList';
-import { GameConfig } from '../config/GameConfig';
+import { BaseScene } from '@/scenes/BaseScene';
+import { SceneManager } from '@/managers/SceneManager';
+import { BackgroundAnimation } from '@/components/BackgroundAnimation';
+import { LogoAnimation } from '@/ui/LogoAnimation';
+import { GameList } from '@/ui/GameList';
+import { GameConfig } from '@/config/GameConfig';
 
 export class MainMenuScene extends BaseScene {
   private background: BackgroundAnimation;
@@ -27,14 +27,19 @@ export class MainMenuScene extends BaseScene {
         label: 'Space Shooter',
         isActive: true,
         onClick: () => {
-          import('../games/spaceshooter/scenes/SpaceShooterScene').then(({ SpaceShooterScene }) => {
+          import('@/games/spaceshooter/scenes/SpaceShooterScene').then(({ SpaceShooterScene }) => {
             SceneManager.changeSceneWithTransition(new SpaceShooterScene());
           });
         },
       },
       {
         label: 'Fruit Collector',
-        isActive: false,
+        isActive: true,
+        onClick: () => {
+          import('@/games/fruitcollector/scenes/FruitCollectorScene').then(({ FruitCollectorScene }) => {
+            SceneManager.changeSceneWithTransition(new FruitCollectorScene());
+          });
+        },
       },
       {
         label: 'Coin Catcher',

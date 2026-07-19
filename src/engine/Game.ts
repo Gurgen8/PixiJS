@@ -1,7 +1,7 @@
 import { Application, Ticker } from 'pixi.js';
-import { GameConfig } from '../config/GameConfig';
-import { SceneManager } from '../managers/SceneManager';
-import { AssetManager } from '../managers/AssetManager';
+import { GameConfig } from '@/config/GameConfig';
+import { SceneManager } from '@/managers/SceneManager';
+import { AssetManager } from '@/managers/AssetManager';
 
 /**
  * Класс Game - это фасад нашего движка.

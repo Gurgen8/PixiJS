@@ -1,16 +1,16 @@
-import { BaseScene } from '../../../scenes/BaseScene';
-import { Player } from '../entities/Player';
-import { HUD } from '../ui/HUD';
-import { BulletManager } from '../systems/BulletManager';
-import { EnemySpawner } from '../systems/EnemySpawner';
-import { CollisionSystem } from '../systems/CollisionSystem';
-import { GameManager } from '../GameManager';
-import { SceneManager } from '../../../managers/SceneManager';
-import { GameOverScene } from './GameOverScene';
-import { GameConfig } from '../../../config/GameConfig';
+import { BaseScene } from '@/scenes/BaseScene';
+import { Player } from '@/games/spaceshooter/entities/Player';
+import { HUD } from '@/games/spaceshooter/ui/HUD';
+import { BulletManager } from '@/games/spaceshooter/systems/BulletManager';
+import { EnemySpawner } from '@/games/spaceshooter/systems/EnemySpawner';
+import { CollisionSystem } from '@/games/spaceshooter/systems/CollisionSystem';
+import { GameManager } from '@/games/spaceshooter/GameManager';
+import { SceneManager } from '@/managers/SceneManager';
+import { GameOverScene } from '@/games/spaceshooter/scenes/GameOverScene';
+import { GameConfig } from '@/config/GameConfig';
 import { Container } from 'pixi.js';
-import { InputManager } from '../../../managers/InputManager';
-import { AudioManager } from '../../../managers/AudioManager';
+import { InputManager } from '@/managers/InputManager';
+import { AudioManager } from '@/managers/AudioManager';
 
 export class SpaceShooterScene extends BaseScene {
   private player: Player;

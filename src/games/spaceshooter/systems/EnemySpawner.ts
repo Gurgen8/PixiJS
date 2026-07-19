@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js';
-import { Enemy } from '../entities/Enemy';
-import { ObjectPool } from '../../../utils/ObjectPool';
-import { GameConfig } from '../../../config/GameConfig';
+import { Enemy } from '@/games/spaceshooter/entities/Enemy';
+import { ObjectPool } from '@/utils/ObjectPool';
+import { GameConfig } from '@/config/GameConfig';
 
 export class EnemySpawner {
   private enemyPool: ObjectPool<Enemy>;

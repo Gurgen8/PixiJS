@@ -1,6 +1,6 @@
 import { Sprite, Assets } from 'pixi.js';
-import { InputManager } from '../../../managers/InputManager';
-import { GameConfig } from '../../../config/GameConfig';
+import { InputManager } from '@/managers/InputManager';
+import { GameConfig } from '@/config/GameConfig';
 
 export class Player extends Sprite {
   public speed: number = 8;

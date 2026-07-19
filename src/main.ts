@@ -1,8 +1,8 @@
 import { Assets } from 'pixi.js';
-import { appInstance } from './app/App';
-import { SceneManager } from './managers/SceneManager';
-import { InputManager } from './managers/InputManager';
-import { MainMenuScene } from './scenes/MainMenuScene';
+import { appInstance } from '@/app/App';
+import { SceneManager } from '@/managers/SceneManager';
+import { InputManager } from '@/managers/InputManager';
+import { MainMenuScene } from '@/scenes/MainMenuScene';
 
 async function bootstrap() {
   const canvas = document.getElementById('game-canvas') as HTMLCanvasElement;

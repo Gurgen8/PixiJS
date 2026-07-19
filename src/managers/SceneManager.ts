@@ -1,7 +1,7 @@
 import { Container, Ticker, Graphics } from 'pixi.js';
-import { appInstance } from '../app/App';
-import { BaseScene } from '../scenes/BaseScene';
-import { GameConfig } from '../config/GameConfig';
+import { appInstance } from '@/app/App';
+import { BaseScene } from '@/scenes/BaseScene';
+import { GameConfig } from '@/config/GameConfig';
 
 export class SceneManager {
   private static currentScene: BaseScene | null = null;

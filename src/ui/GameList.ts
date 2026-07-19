@@ -1,5 +1,5 @@
 import { Container } from 'pixi.js';
-import { GameButton, type GameButtonOptions } from './GameButton';
+import { GameButton, type GameButtonOptions } from '@/ui/GameButton';
 
 export class GameList extends Container {
   private buttons: GameButton[] = [];

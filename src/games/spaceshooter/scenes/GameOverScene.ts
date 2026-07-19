@@ -1,10 +1,10 @@
-import { BaseScene } from '../../../scenes/BaseScene';
-import { InputManager } from '../../../managers/InputManager';
-import { GameConfig } from '../../../config/GameConfig';
-import { SceneManager } from '../../../managers/SceneManager';
-import { MainMenuScene } from '../../../scenes/MainMenuScene';
+import { BaseScene } from '@/scenes/BaseScene';
+import { InputManager } from '@/managers/InputManager';
+import { GameConfig } from '@/config/GameConfig';
+import { SceneManager } from '@/managers/SceneManager';
+import { MainMenuScene } from '@/scenes/MainMenuScene';
 import { Text, TextStyle } from 'pixi.js';
-import { GameButton } from '../../../ui/GameButton';
+import { GameButton } from '@/ui/GameButton';
 
 export class GameOverScene extends BaseScene {
   private titleText: Text;
@@ -49,7 +49,7 @@ export class GameOverScene extends BaseScene {
       onClick: () => {
         // To avoid circular dependency, dynamically import SpaceShooterScene or just use it.
         // Doing dynamic import or just standard import since it's in the same folder.
-        import('./SpaceShooterScene').then(({ SpaceShooterScene }) => {
+        import('@/games/spaceshooter/scenes/SpaceShooterScene').then(({ SpaceShooterScene }) => {
           SceneManager.changeSceneWithTransition(new SpaceShooterScene());
         });
       },
@@ -76,7 +76,7 @@ export class GameOverScene extends BaseScene {
     this.titleText.scale.set(1 + Math.sin(Date.now() / 300) * 0.05);
 
     if (InputManager.isKeyJustPressed('KeyR')) {
-      import('./SpaceShooterScene').then(({ SpaceShooterScene }) => {
+      import('@/games/spaceshooter/scenes/SpaceShooterScene').then(({ SpaceShooterScene }) => {
         SceneManager.changeSceneWithTransition(new SpaceShooterScene());
       });
     }

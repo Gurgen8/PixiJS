@@ -1,7 +1,7 @@
-import { Player } from '../entities/Player';
-import { BulletManager } from './BulletManager';
-import { EnemySpawner } from './EnemySpawner';
-import { GameManager } from '../GameManager';
+import { Player } from '@/games/spaceshooter/entities/Player';
+import { BulletManager } from '@/games/spaceshooter/systems/BulletManager';
+import { EnemySpawner } from '@/games/spaceshooter/systems/EnemySpawner';
+import { GameManager } from '@/games/spaceshooter/GameManager';
 
 export class CollisionSystem {
   public static update(

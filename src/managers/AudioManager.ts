@@ -25,8 +25,10 @@ export class AudioManager {
 
     if (id === 'shoot') {
       this.playShoot();
-    } else if (id === 'game_over') {
+    } else if (id === 'game_over' || id === 'explosion' || id === 'bomb') {
       this.playExplosion();
+    } else if (id === 'catch') {
+      this.playCatch();
     }
   }
 
@@ -42,6 +44,26 @@ export class AudioManager {
     const now = this.ctx.currentTime;
     osc.frequency.setValueAtTime(800, now);
     osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
+
+    gain.gain.setValueAtTime(0.1, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+
+    osc.start(now);
+    osc.stop(now + 0.1);
+  }
+
+  private static playCatch(): void {
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    // Blip sound: high pitch going slightly higher quickly
+    const now = this.ctx.currentTime;
+    osc.frequency.setValueAtTime(800, now);
+    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
 
     gain.gain.setValueAtTime(0.1, now);
     gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
