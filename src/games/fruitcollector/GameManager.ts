@@ -78,7 +78,7 @@ export class GameManager {
 
   private triggerGameOver(): void {
     this.isGameOver = true;
-    this.basket.isActive = false;
+    this.basket.active.isActive = false;
     AudioManager.playSound('game_over');
     this.onGameOverCallback();
   }

@@ -47,7 +47,7 @@ export class ItemSpawner {
       }
     } else {
       // Check if all items are inactive to complete wave
-      const anyActive = this.activeItems.some((i) => i.isActive);
+      const anyActive = this.activeItems.some((i) => i.active.isActive);
       if (!anyActive && this.onWaveComplete) {
         this.onWaveComplete();
       }
@@ -55,14 +55,14 @@ export class ItemSpawner {
 
     // Update active items
     for (const item of this.activeItems) {
-      if (item.isActive) {
+      if (item.active.isActive) {
         item.update(delta);
       }
     }
   }
 
   private spawnItem(): void {
-    const inactiveItem = this.activeItems.find((i) => !i.isActive);
+    const inactiveItem = this.activeItems.find((i) => !i.active.isActive);
     if (!inactiveItem) return; // Pool empty
 
     this.itemsSpawned++;
@@ -80,7 +80,7 @@ export class ItemSpawner {
 
   public clear(): void {
     for (const item of this.activeItems) {
-      item.isActive = false;
+      item.active.isActive = false;
       item.visible = false;
     }
   }

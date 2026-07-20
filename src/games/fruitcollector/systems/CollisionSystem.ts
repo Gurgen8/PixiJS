@@ -8,27 +8,27 @@ export class CollisionSystem {
     const activeItems = itemSpawner.activeItems;
 
     for (const item of activeItems) {
-      if (!item.isActive) continue;
+      if (!item.active.isActive) continue;
 
       // 1. Check item fell off screen
-      if (item.y > GameConfig.height + item.hitHeight) {
+      if (item.y > GameConfig.height + item.collision.hitHeight) {
         item.hit(); // Deactivate
-        if (item.itemType === 'fruit') {
+        if (item.item.itemType === 'fruit') {
           gameManager.onItemMissed();
         }
         continue;
       }
 
       // 2. Check item vs basket
-      if (basket.isActive && this.checkAABB(basket, item)) {
+      if (basket.active.isActive && this.checkAABB(basket, item)) {
         item.hit();
 
-        if (item.itemType === 'fruit') {
+        if (item.item.itemType === 'fruit') {
           gameManager.addScore(100);
           import('@/managers/AudioManager').then(({ AudioManager }) => {
             AudioManager.playSound('catch');
           });
-        } else if (item.itemType === 'bomb') {
+        } else if (item.item.itemType === 'bomb') {
           gameManager.onBombHit();
         }
       }
