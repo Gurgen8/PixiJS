@@ -6,7 +6,7 @@ import { EnemySpawner } from '@/games/spaceshooter/systems/EnemySpawner';
 import { CollisionSystem } from '@/games/spaceshooter/systems/CollisionSystem';
 import { GameManager } from '@/games/spaceshooter/GameManager';
 import { SceneManager } from '@/managers/SceneManager';
-import { GameOverScene } from '@/games/spaceshooter/scenes/GameOverScene';
+import { GameOverScene } from '@/scenes/GameOverScene';
 import { GameConfig } from '@/config/GameConfig';
 import { Container } from 'pixi.js';
 import { InputManager } from '@/managers/InputManager';
@@ -100,7 +100,13 @@ export class SpaceShooterScene extends BaseScene {
     // Wait a brief moment, then transition to GameOverScene
     setTimeout(() => {
       SceneManager.changeSceneWithTransition(
-        new GameOverScene(this.gameManager.score, this.gameManager.wave),
+        new GameOverScene({
+          stats: [
+            `Final Score: ${this.gameManager.score}`,
+            `Waves Survived: ${this.gameManager.wave}`,
+          ],
+          onRestart: () => SceneManager.changeSceneWithTransition(new SpaceShooterScene()),
+        }),
       );
     }, 1000);
   }

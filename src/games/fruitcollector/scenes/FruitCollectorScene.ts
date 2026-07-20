@@ -5,7 +5,7 @@ import { ItemSpawner } from '@/games/fruitcollector/systems/ItemSpawner';
 import { CollisionSystem } from '@/games/fruitcollector/systems/CollisionSystem';
 import { GameManager } from '@/games/fruitcollector/GameManager';
 import { SceneManager } from '@/managers/SceneManager';
-import { GameOverScene } from '@/games/fruitcollector/scenes/GameOverScene';
+import { GameOverScene } from '@/scenes/GameOverScene';
 import { GameConfig } from '@/config/GameConfig';
 import { Container } from 'pixi.js';
 import { InputManager } from '@/managers/InputManager';
@@ -86,7 +86,13 @@ export class FruitCollectorScene extends BaseScene {
   private onGameOver(): void {
     setTimeout(() => {
       SceneManager.changeSceneWithTransition(
-        new GameOverScene(this.gameManager.score, this.gameManager.wave),
+        new GameOverScene({
+          stats: [
+            `Final Score: ${this.gameManager.score}`,
+            `Waves Survived: ${this.gameManager.wave}`,
+          ],
+          onRestart: () => SceneManager.changeSceneWithTransition(new FruitCollectorScene()),
+        }),
       );
     }, 1000);
   }

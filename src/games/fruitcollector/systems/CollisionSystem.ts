@@ -4,11 +4,7 @@ import { GameManager } from '@/games/fruitcollector/GameManager';
 import { GameConfig } from '@/config/GameConfig';
 
 export class CollisionSystem {
-  public static update(
-    basket: Basket,
-    itemSpawner: ItemSpawner,
-    gameManager: GameManager,
-  ): void {
+  public static update(basket: Basket, itemSpawner: ItemSpawner, gameManager: GameManager): void {
     const activeItems = itemSpawner.activeItems;
 
     for (const item of activeItems) {

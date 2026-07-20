@@ -36,8 +36,19 @@ export class MainMenuScene extends BaseScene {
         label: 'Fruit Collector',
         isActive: true,
         onClick: () => {
-          import('@/games/fruitcollector/scenes/FruitCollectorScene').then(({ FruitCollectorScene }) => {
-            SceneManager.changeSceneWithTransition(new FruitCollectorScene());
+          import('@/games/fruitcollector/scenes/FruitCollectorScene').then(
+            ({ FruitCollectorScene }) => {
+              SceneManager.changeSceneWithTransition(new FruitCollectorScene());
+            },
+          );
+        },
+      },
+      {
+        label: 'Bomberman',
+        isActive: true,
+        onClick: () => {
+          import('@/games/bomberman/scenes/BombermanScene').then(({ BombermanScene }) => {
+            SceneManager.changeSceneWithTransition(new BombermanScene());
           });
         },
       },

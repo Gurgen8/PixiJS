@@ -5,10 +5,10 @@ import { GameConfig } from '@/config/GameConfig';
 export class Basket extends Container {
   public speed: number = 10;
   public isActive: boolean = true;
-  
+
   public hitWidth: number = 80;
   public hitHeight: number = 40;
-  
+
   private sprite: Text;
 
   constructor() {
@@ -20,9 +20,9 @@ export class Basket extends Container {
       style: new TextStyle({ fontSize: 60 }),
     });
     this.sprite.anchor.set(0.5);
-    
+
     this.addChild(this.sprite);
-    
+
     this.width = this.hitWidth;
     this.height = this.hitHeight;
 
