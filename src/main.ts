@@ -34,6 +34,22 @@ async function bootstrap() {
     // appInstance.pixiApp.renderer.resize(window.innerWidth, window.innerHeight);
     // SceneManager.currentScene?.resize(window.innerWidth, window.innerHeight);
   });
+
+  // Setup Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  let isLightMode = false;
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      isLightMode = !isLightMode;
+      document.body.classList.toggle('light-mode', isLightMode);
+
+      if (isLightMode) {
+        themeToggle.textContent = '🌙 Dark Mode';
+      } else {
+        themeToggle.textContent = '☀️ Light Mode';
+      }
+    });
+  }
 }
 
 bootstrap().catch(console.error);
